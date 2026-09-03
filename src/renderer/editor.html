@@ -12,8 +12,8 @@
     <header>
       <div class="logo"><span>WX</span><strong>Shot</strong></div>
       <div class="header-actions">
-        <button class="header-button smart-redact" title="Akıllı gizle"><span>◈</span><b>Akıllı gizle</b></button>
-        <button class="icon-button history-toggle" title="Geçmiş" aria-label="Geçmiş">◴</button>
+        <button class="header-button smart-redact" title="Akıllı gizle"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 2.8 8.2 7 10 4.2-1.8 7-5.2 7-10V6l-7-3Z"/><path d="m9.5 12 1.7 1.7 3.5-3.7"/></svg><b>Akıllı gizle</b></button>
+        <button class="icon-button history-toggle" title="Geçmiş" aria-label="Geçmiş"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></button>
         <div class="zoom-controls" aria-label="Yakınlaştırma">
           <button class="icon-button zoom-out" aria-label="Uzaklaştır">−</button>
           <button class="zoom-value" title="Sığdır">100%</button>
@@ -36,29 +36,37 @@
 
     <footer>
       <div class="tools" role="toolbar" aria-label="Çizim araçları">
-        <button class="tool active" data-tool="pen" title="Kalem (P)" aria-pressed="true">✎</button>
-        <button class="tool" data-tool="highlight" title="Vurgulayıcı (H)" aria-pressed="false">▰</button>
-        <button class="tool" data-tool="line" title="Çizgi (L)" aria-pressed="false">╱</button>
-        <button class="tool" data-tool="arrow" title="Ok (A)" aria-pressed="false">➜</button>
-        <button class="tool" data-tool="rect" title="Dikdörtgen (R)" aria-pressed="false">□</button>
-        <button class="tool" data-tool="ellipse" title="Elips (O)" aria-pressed="false">○</button>
-        <button class="tool" data-tool="blur" title="Bulanıklaştır (B)" aria-pressed="false">◉</button>
-        <button class="tool" data-tool="pixelate" title="Pikselleştir (X)" aria-pressed="false">▦</button>
-        <button class="tool" data-tool="text" title="Metin (T)" aria-pressed="false">T</button>
-        <button class="tool" data-tool="eraser" title="Silgi (E)" aria-pressed="false">◇</button>
+        <button class="tool active" data-tool="pen" title="Kalem (P)" aria-label="Kalem" aria-pressed="true"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14.7 5.3 4 4"/><path d="M4 20l4.3-1 10.4-10.4a2.8 2.8 0 0 0-4-4L4.3 15 4 20Z"/><path d="m12.7 7.3 4 4"/></svg></button>
+        <button class="tool" data-tool="highlight" title="Vurgulayıcı (H)" aria-label="Vurgulayıcı" aria-pressed="false"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 11 6 6"/><path d="M4 14 14 4a2.8 2.8 0 0 1 4 0l2 2a2.8 2.8 0 0 1 0 4L10 20H4v-6Z"/><path d="M3 21h8"/></svg></button>
+        <button class="tool" data-tool="line" title="Çizgi (L)" aria-label="Çizgi" aria-pressed="false"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5"/><circle cx="5" cy="19" r="1"/><circle cx="19" cy="5" r="1"/></svg></button>
+        <button class="tool" data-tool="arrow" title="Ok (A)" aria-label="Ok" aria-pressed="false"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15"/><path d="m14 7 5 5-5 5"/></svg></button>
+        <button class="tool" data-tool="rect" title="Dikdörtgen (R)" aria-label="Dikdörtgen" aria-pressed="false"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/></svg></button>
+        <button class="tool" data-tool="ellipse" title="Elips (O)" aria-label="Elips" aria-pressed="false"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="8" ry="7"/></svg></button>
+        <button class="tool" data-tool="blur" title="Bulanıklaştır (B)" aria-label="Bulanıklaştır" aria-pressed="false"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7" opacity=".65"/><path d="M12 2v1M12 21v1M2 12h1M21 12h1" opacity=".65"/></svg></button>
+        <button class="tool" data-tool="pixelate" title="Pikselleştir (X)" aria-label="Pikselleştir" aria-pressed="false"><svg class="tool-icon pixel-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="5" height="5"/><rect x="10.5" y="4" width="3" height="5"/><rect x="15" y="4" width="5" height="5"/><rect x="4" y="10.5" width="5" height="3"/><rect x="10.5" y="10.5" width="3" height="3"/><rect x="15" y="10.5" width="5" height="3"/><rect x="4" y="15" width="5" height="5"/><rect x="10.5" y="15" width="3" height="5"/><rect x="15" y="15" width="5" height="5"/></svg></button>
+        <button class="tool" data-tool="text" title="Metin (T)" aria-label="Metin" aria-pressed="false"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M12 5v14M8 19h8"/></svg></button>
+        <button class="tool" data-tool="eraser" title="Silgi (E)" aria-label="Silgi" aria-pressed="false"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 19-4-4L14.5 4.5a2.1 2.1 0 0 1 3 0l2 2a2.1 2.1 0 0 1 0 3L10 19H8Z"/><path d="m11 8 5 5M8 19h12"/></svg></button>
         <span class="divider"></span>
-        <div class="colors" aria-label="Renk seçimi"></div>
+        <div class="colors" role="group" aria-label="Renk seçimi">
+          <button class="color color-red active" data-color="#ff3b5c" title="Kırmızı" aria-label="Kırmızı" aria-pressed="true"></button>
+          <button class="color color-orange" data-color="#ffb020" title="Turuncu" aria-label="Turuncu" aria-pressed="false"></button>
+          <button class="color color-green" data-color="#34d399" title="Yeşil" aria-label="Yeşil" aria-pressed="false"></button>
+          <button class="color color-blue" data-color="#38bdf8" title="Mavi" aria-label="Mavi" aria-pressed="false"></button>
+          <button class="color color-white" data-color="#ffffff" title="Beyaz" aria-label="Beyaz" aria-pressed="false"></button>
+          <button class="color color-black" data-color="#111827" title="Siyah" aria-label="Siyah" aria-pressed="false"></button>
+          <input class="custom-color" type="color" value="#8b5cf6" title="Özel renk seç" aria-label="Özel renk seç">
+        </div>
         <label class="width-control" title="Çizgi kalınlığı"><input class="width-input" type="range" min="2" max="18" value="5" aria-label="Çizgi kalınlığı"></label>
-        <button class="tool style-toggle" title="Stil" aria-label="Stil">☷</button>
+        <button class="tool style-toggle" title="Stil seçenekleri" aria-label="Stil seçenekleri"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h7M15 6h5M4 12h3M11 12h9M4 18h9M17 18h3"/><circle cx="13" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="18" r="2"/></svg></button>
         <span class="divider"></span>
-        <button class="tool undo" title="Geri al" disabled>↶</button>
-        <button class="tool redo" title="Yinele" disabled>↷</button>
+        <button class="tool undo" title="Geri al (Ctrl+Z)" aria-label="Geri al" disabled><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7-5 5 5 5"/><path d="M5 12h8a6 6 0 0 1 6 6"/></svg></button>
+        <button class="tool redo" title="Yinele (Ctrl+Shift+Z)" aria-label="Yinele" disabled><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 7 5 5-5 5"/><path d="M19 12h-8a6 6 0 0 0-6 6"/></svg></button>
       </div>
       <div class="actions">
         <select class="format-select" aria-label="Biçim"><option value="png">PNG</option><option value="jpeg">JPEG</option><option value="webp">WebP</option></select>
         <select class="scale-select" aria-label="Ölçek"><option value="1">100%</option><option value="0.75">75%</option><option value="0.5">50%</option></select>
-        <button class="secondary copy"><span>▣</span>Kopyala</button>
-        <button class="primary save"><span>⇩</span>Farklı kaydet</button>
+        <button class="secondary copy"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>Kopyala</button>
+        <button class="primary save"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>Farklı kaydet</button>
       </div>
     </footer>
 

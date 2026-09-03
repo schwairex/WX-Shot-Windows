@@ -1,6 +1,7 @@
 "use strict";
 
 const assert = require("node:assert/strict");
+const { writeFile } = require("node:fs/promises");
 const endpoint = "http://127.0.0.1:9444";
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -86,6 +87,12 @@ async function evaluate(client, expression) {
   assert.ok(editorState.base[0] > 100 && editorState.base[1] > 100);
   assert.deepEqual(editorState.formats, ["png", "jpeg", "webp"]);
 
+  const customColorState = await evaluate(editorClient, `(()=>{const input=document.querySelector('.custom-color');input.value='#8b5cf6';input.dispatchEvent(new Event('input',{bubbles:true}));return {value:input.value,active:input.classList.contains('active'),paletteActive:document.querySelectorAll('[data-color].active').length,visible:getComputedStyle(document.querySelector('.color-red')).backgroundColor}})()`);
+  assert.equal(customColorState.value, "#8b5cf6");
+  assert.equal(customColorState.active, true);
+  assert.equal(customColorState.paletteActive, 0);
+  assert.equal(customColorState.visible, "rgb(255, 59, 92)");
+
   const rect = editorState.stage;
   const startX = rect.x + rect.width * 0.18;
   const startY = rect.y + rect.height * 0.35;
@@ -118,6 +125,21 @@ async function evaluate(client, expression) {
   const widthAfter = await evaluate(editorClient, `document.querySelector('.canvas-stage').getBoundingClientRect().width`);
   assert.ok(widthAfter > widthBefore);
 
+  await evaluate(editorClient, `document.querySelector('.copy').click()`);
+  let copyToast = "";
+  for (let attempt = 0; attempt < 50; attempt += 1) {
+    copyToast = await evaluate(editorClient, `document.querySelector('.toast').textContent`);
+    if (copyToast.includes("Panoya kopyalandı") || copyToast.includes("Kopyalanamadı")) break;
+    await sleep(100);
+  }
+  assert.equal(copyToast, "Panoya kopyalandı");
+
+  if (process.env.WX_SHOT_E2E_SCREENSHOT) {
+    await editorClient.send("Page.enable");
+    const screenshot = await editorClient.send("Page.captureScreenshot", { format: "png" });
+    await writeFile(process.env.WX_SHOT_E2E_SCREENSHOT, Buffer.from(screenshot.data, "base64"));
+  }
+
   console.log(JSON.stringify({
     app: "WX Shot Windows",
     launcher: true,
@@ -131,6 +153,8 @@ async function evaluate(client, expression) {
     eraserPixels: inkAfterErase,
     blurPixels: effectPixels,
     zoom: true,
+    customColor: customColorState,
+    clipboardCopy: true,
     formats: editorState.formats
   }, null, 2));
 

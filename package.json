@@ -1,6 +1,6 @@
 {
   "name": "wx-shot-windows",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "WX Shot - Windows için yerel ekran görüntüsü ve düzenleme uygulaması",
   "main": "src/main.js",
   "author": "WX Shot",

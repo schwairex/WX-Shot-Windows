@@ -1,6 +1,6 @@
 "use strict";
 
-const palette = ["#ff3b5c", "#ffb020", "#34d399", "#38bdf8", "#ffffff", "#111827"];
+const DEFAULT_COLOR = "#ff3b5c";
 const base = document.querySelector(".base");
 const effects = document.querySelector(".effects");
 const draw = document.querySelector(".draw");
@@ -18,7 +18,7 @@ const freehandTools = new Set(["pen", "highlight", "eraser"]);
 const effectTools = new Set(["blur", "pixelate"]);
 
 let tool = "pen";
-let color = palette[0];
+let color = DEFAULT_COLOR;
 let lineWidth = 5;
 let activeAction = null;
 let animationFrame = 0;
@@ -31,8 +31,6 @@ let panState = null;
 let historySaved = false;
 let sourceId = crypto.randomUUID();
 const styleState = { opacity: 1, fill: false, dashed: false, shadow: false, arrowHead: "classic" };
-
-document.querySelector(".colors").innerHTML = palette.map((item, index) => `<button class="color ${index === 0 ? "active" : ""}" data-color="${item}" style="--color:${item}" aria-label="${item}"></button>`).join("");
 
 window.wxDesktop.onEditorData(async ({ dataUrl }) => {
   try {
@@ -101,11 +99,23 @@ function selectTool(nextTool) {
 
 document.querySelectorAll("[data-color]").forEach((button) => {
   button.addEventListener("click", () => {
-    document.querySelectorAll("[data-color]").forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
-    color = button.dataset.color;
+    selectColor(button.dataset.color, button);
   });
 });
+
+const customColor = document.querySelector(".custom-color");
+customColor.addEventListener("input", () => selectColor(customColor.value, customColor));
+customColor.addEventListener("change", () => selectColor(customColor.value, customColor));
+
+function selectColor(nextColor, selectedControl) {
+  color = /^#[0-9a-f]{6}$/i.test(nextColor) ? nextColor.toLowerCase() : DEFAULT_COLOR;
+  document.querySelectorAll("[data-color]").forEach((item) => {
+    const active = item === selectedControl;
+    item.classList.toggle("active", active);
+    item.setAttribute("aria-pressed", String(active));
+  });
+  customColor.classList.toggle("active", selectedControl === customColor);
+}
 
 document.querySelector(".width-input").addEventListener("input", (event) => { lineWidth = Number(event.target.value); });
 document.querySelector(".style-opacity").addEventListener("input", (event) => { styleState.opacity = Number(event.target.value) / 100; });

@@ -1,6 +1,6 @@
-# WX Shot for Windows 1.0.0 — Hızlı Kurulum
+# WX Shot for Windows 1.2.0 — Hızlı Kurulum
 
-1. GitHub **Releases** sayfasından `WX-Shot-Windows-Setup-1.0.0-x64.exe` dosyasını indirin. Bu teslim klasörünü doğrudan aldıysanız dosya `release-assets` içindedir.
+1. GitHub **Releases** sayfasından `WX-Shot-Windows-Setup-1.2.0-x64.exe` dosyasını indirin. Bu teslim klasörünü doğrudan aldıysanız dosya `release-assets` içindedir.
 2. `WX-Shot-Windows-SHA256.txt` içindeki değerle indirdiğiniz dosyanın bütünlüğünü isterseniz doğrulayın.
 3. Kurulum dosyasını çalıştırın, kurulum klasörünü seçip işlemi tamamlayın.
 4. WX Shot'u Başlat menüsünden açın.
@@ -11,7 +11,7 @@
 PowerShell'de kurulum dosyasının bulunduğu klasörde aşağıdaki komutu çalıştırabilirsiniz:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\WX-Shot-Windows-Setup-1.0.0-x64.exe
+Get-FileHash -Algorithm SHA256 .\WX-Shot-Windows-Setup-1.2.0-x64.exe
 ```
 
 Çıktı, `WX-Shot-Windows-SHA256.txt` içindeki değerle aynı olmalıdır.

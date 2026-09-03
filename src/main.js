@@ -1,6 +1,6 @@
 "use strict";
 
-const { app, BrowserWindow, Menu, Tray, clipboard, desktopCapturer, dialog, globalShortcut, ipcMain, nativeImage, screen, shell } = require("electron");
+const { app, BrowserWindow, ClipboardItem, Menu, Tray, clipboard, desktopCapturer, dialog, globalShortcut, ipcMain, nativeImage, screen, shell } = require("electron");
 const { spawn } = require("node:child_process");
 const { promises: fs } = require("node:fs");
 const path = require("node:path");
@@ -301,9 +301,23 @@ ipcMain.handle("selection:cancel", () => {
   showLauncher();
   return { ok: true };
 });
-ipcMain.handle("image:copy", (_event, dataUrl) => {
+ipcMain.handle("image:copy", async (_event, dataUrl) => {
   assertImageDataUrl(dataUrl);
-  clipboard.writeImage(nativeImage.createFromDataURL(dataUrl));
+  const image = nativeImage.createFromDataURL(dataUrl);
+  if (image.isEmpty()) throw new Error("Panoya gönderilecek görüntü oluşturulamadı.");
+
+  if (typeof ClipboardItem === "function" && typeof clipboard.write === "function") {
+    const png = image.toPNG();
+    await clipboard.write([
+      new ClipboardItem({
+        "image/png": new Blob([png], { type: "image/png" })
+      })
+    ]);
+  } else if (typeof clipboard.writeImage === "function") {
+    clipboard.writeImage(image);
+  } else {
+    throw new Error("Bu Electron sürümünde görüntü panosu kullanılamıyor.");
+  }
   return { ok: true };
 });
 ipcMain.handle("image:save", async (_event, payload) => {

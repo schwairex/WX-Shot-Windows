@@ -7,7 +7,7 @@
 
   Windows için hızlı, yerel ve gizlilik odaklı ekran görüntüsü uygulaması.
 
-  [![Sürüm](https://img.shields.io/badge/sürüm-1.0.0-6D5FE8?style=for-the-badge)](#sürüm-notları)
+  [![Sürüm](https://img.shields.io/badge/sürüm-1.2.0-6D5FE8?style=for-the-badge)](#sürüm-notları)
   [![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4?style=for-the-badge&logo=windows11&logoColor=white)](#sistem-gereksinimleri)
   [![Electron](https://img.shields.io/badge/Electron-44-47848F?style=for-the-badge&logo=electron&logoColor=white)](https://www.electronjs.org/)
   [![Lisans](https://img.shields.io/badge/lisans-MIT-F59E0B?style=for-the-badge)](LICENSE)
@@ -29,6 +29,7 @@ WX Shot; ekranın tamamını veya seçtiğiniz bir alanı yakalamanızı, görü
 - Çoklu monitör ve yüksek DPI desteği
 - Kalem basıncı destekli akıcı çizim motoru
 - Kalem, vurgulayıcı, çizgi, ok, dikdörtgen ve elips
+- Hazır renk paleti ve sınırsız özel renk seçici
 - Metin, silgi, bulanıklaştırma ve pikselleştirme
 - Windows'un cihaz içi OCR motoruyla hassas bilgi tespiti ve gizleme
 - Renk, kalınlık, dolgu, saydamlık, kesik çizgi, gölge ve ok ucu seçenekleri
@@ -55,7 +56,7 @@ WX Shot; ekranın tamamını veya seçtiğiniz bir alanı yakalamanızı, görü
 ### Son kullanıcı için önerilen yöntem
 
 1. GitHub sayfasının sağındaki **Releases** bölümünü açın.
-2. En son sürümün **Assets** alanından `WX-Shot-Windows-Setup-1.0.0-x64.exe` dosyasını indirin.
+2. En son sürümün **Assets** alanından `WX-Shot-Windows-Setup-1.2.0-x64.exe` dosyasını indirin.
 3. Kurulum dosyasını çalıştırın.
 4. Kurulum konumunu seçip işlemi tamamlayın.
 5. WX Shot'ı masaüstü kısayolundan veya Başlat menüsünden açın.
@@ -122,18 +123,6 @@ npm run dist:win
 
 Üretilen `.exe` dosyası `dist` klasöründe yer alır. Paketlenmiş klasör sürümü için `npm run pack:win` komutunu kullanabilirsiniz.
 
-## GitHub'da yayınlama
-
-GitHub normal depo dosyaları için boyut sınırı uyguladığı için kurulum dosyasını kaynak kodla birlikte commit etmeyin. Bu teslimdeki `release-assets` klasörü yalnızca yayın dosyalarını bir arada tutar.
-
-1. Depo kökündeki kaynak kodu GitHub'a gönderin; `.gitignore`, `release-assets` içindeki büyük `.exe` dosyasını otomatik olarak hariç tutar.
-2. GitHub'da **Releases → Draft a new release** seçeneğini açın.
-3. Etiket ve sürüm başlığı olarak `v1.0.0` kullanın.
-4. `release-assets/WX-Shot-Windows-Setup-1.0.0-x64.exe` ve SHA-256 dosyasını **Assets** alanına sürükleyin.
-5. Sürümü yayımlayın.
-
-Yeni bir `v*` etiketi gönderildiğinde `.github/workflows/windows-release.yml` iş akışı testleri çalıştırır, Windows kurulum paketini üretir ve GitHub Release'e ekler.
-
 ## Proje yapısı
 
 ```text
@@ -156,7 +145,7 @@ npm test
 npm run check
 ```
 
-Gerçek Windows masaüstü oturumunda monitör yakalama, alan seçimi, kırpma, kalem, silgi, bulanıklaştırma, yakınlaştırma, PNG/JPEG/WebP çıktıları ve yerel OCR akışı doğrulanmıştır.
+Gerçek Windows masaüstü oturumunda monitör yakalama, alan seçimi, kırpma, kalem, silgi, bulanıklaştırma, özel renk seçimi, panoya görüntü kopyalama, yakınlaştırma, PNG/JPEG/WebP çıktıları ve yerel OCR akışı doğrulanmıştır.
 
 ## Güvenlik mimarisi
 
@@ -175,6 +164,14 @@ Güvenlik açığını herkese açık issue oluşturmadan bildirmek için [SECUR
 Hata bildirimleri ve geliştirme önerileri değerlidir. Değişiklik göndermeden önce [CONTRIBUTING.md](CONTRIBUTING.md) dosyasını okuyun.
 
 ## Sürüm notları
+
+### v1.1.0
+
+- Electron 44'ün yeni `ClipboardItem` API'siyle Windows panosuna görüntü kopyalama düzeltildi
+- Araç simgeleri sade, tutarlı ve yüksek çözünürlüklü SVG ikonlarla yenilendi
+- Hazır renklerin görünürlüğü düzeltildi
+- Windows renk penceresinden istenen rengi seçme özelliği eklendi
+- GitHub kaynak ve sürüm paketi v1.1.0 için güncellendi
 
 ### v1.0.0
 

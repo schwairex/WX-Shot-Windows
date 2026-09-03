@@ -4,7 +4,9 @@ param(
 
 $ErrorActionPreference = "Stop"
 $projectRoot = (Resolve-Path -LiteralPath $PSScriptRoot).Path
-$installer = Join-Path $projectRoot "dist\WX-Shot-Windows-Setup-1.0.0-x64.exe"
+$package = Get-Content -Raw -LiteralPath (Join-Path $projectRoot "package.json") | ConvertFrom-Json
+$version = $package.version
+$installer = Join-Path $projectRoot "dist\WX-Shot-Windows-Setup-$version-x64.exe"
 $portableRoot = Join-Path $projectRoot "dist\win-unpacked"
 
 if (-not (Test-Path -LiteralPath $installer)) { throw "Installer is missing. Run npm run dist:win first." }
@@ -26,9 +28,9 @@ try {
     Copy-Item -LiteralPath (Join-Path $projectRoot $file) -Destination $sourceRoot
   }
 
-  $installerTarget = Join-Path $outputRoot "WX-Shot-Windows-Setup-1.0.0-x64.exe"
-  $portableTarget = Join-Path $outputRoot "WX-Shot-Windows-Portable-1.0.0-x64.zip"
-  $sourceTarget = Join-Path $outputRoot "WX-Shot-Windows-Source-1.0.0.zip"
+  $installerTarget = Join-Path $outputRoot "WX-Shot-Windows-Setup-$version-x64.exe"
+  $portableTarget = Join-Path $outputRoot "WX-Shot-Windows-Portable-$version-x64.zip"
+  $sourceTarget = Join-Path $outputRoot "WX-Shot-Windows-Source-$version.zip"
   Copy-Item -LiteralPath $installer -Destination $installerTarget -Force
   if (Test-Path -LiteralPath $portableTarget) { Remove-Item -LiteralPath $portableTarget -Force }
   if (Test-Path -LiteralPath $sourceTarget) { Remove-Item -LiteralPath $sourceTarget -Force }
