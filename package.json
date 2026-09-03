@@ -11,7 +11,7 @@
     "test": "node tests/core.test.js",
     "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer/editor.js && node --check src/renderer/selector.js && node --check src/renderer/launcher.js",
     "pack:win": "electron-builder --win dir",
-    "dist:win": "electron-builder --win nsis"
+    "dist:win": "electron-builder --win nsis --publish never"
   },
   "devDependencies": {
     "electron": "^44.1.1",

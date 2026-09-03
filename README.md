@@ -123,6 +123,20 @@ npm run dist:win
 
 Üretilen `.exe` dosyası `dist` klasöründe yer alır. Paketlenmiş klasör sürümü için `npm run pack:win` komutunu kullanabilirsiniz.
 
+## GitHub'da yayınlama
+
+GitHub normal depo dosyaları için boyut sınırı uyguladığı için kurulum dosyasını kaynak kodla birlikte commit etmeyin. Bu teslimdeki `release-assets` klasörü yalnızca yayın dosyalarını bir arada tutar.
+
+1. Depo kökündeki kaynak kodu GitHub'a gönderin; `.gitignore`, `release-assets` içindeki büyük `.exe` dosyasını otomatik olarak hariç tutar.
+2. GitHub'da **Releases → Draft a new release** seçeneğini açın.
+3. Etiket ve sürüm başlığı olarak `v1.2.0` kullanın.
+4. `release-assets/WX-Shot-Windows-Setup-1.2.0-x64.exe` ve SHA-256 dosyasını **Assets** alanına sürükleyin.
+5. Sürümü yayımlayın.
+
+Yeni bir `v*` etiketi gönderildiğinde `.github/workflows/windows-release.yml` iş akışı testleri çalıştırır, Windows kurulum paketini üretir ve GitHub Release'e ekler.
+
+İş akışı sırasında ayrıca bir `GH_TOKEN` tanımlamanız gerekmez. Derleme adımında `electron-builder` otomatik yayını kapatılır; yalnızca etiket sürümündeki son adım GitHub'ın sağladığı sınırlı `github.token` ile setup ve `WX-Shot-Windows-SHA256.txt` dosyasını Release'e yükler.
+
 ## Proje yapısı
 
 ```text
