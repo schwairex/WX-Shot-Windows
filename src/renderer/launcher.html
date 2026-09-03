@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'">
+  <title>WX Shot</title>
+  <link rel="stylesheet" href="launcher.css">
+</head>
+<body>
+  <main>
+    <header>
+      <img src="../../assets/icon-128.png" width="54" height="54" alt="">
+      <div><h1>WX Shot</h1><p>Windows ekran görüntüsü stüdyosu</p></div>
+      <span class="version">v1.0.0</span>
+    </header>
+
+    <section class="hero">
+      <button class="capture primary" data-mode="area">
+        <span class="icon">⌗</span>
+        <span><strong>Alan yakala</strong><small>Fareyle istediğiniz bölgeyi seçin</small></span>
+        <kbd>PrtSc</kbd>
+      </button>
+      <button class="capture" data-mode="display">
+        <span class="icon">▣</span>
+        <span><strong>Ekranın tamamı</strong><small>İşaretçinin bulunduğu monitörü yakalayın</small></span>
+        <kbd>Alt F</kbd>
+      </button>
+    </section>
+
+    <section class="status-card">
+      <div><span class="status-dot"></span><strong>Arka planda hazır</strong></div>
+      <p>WX Shot pencere kapalıyken de sistem tepsisinde çalışır.</p>
+      <p class="shortcut-note"></p>
+    </section>
+
+    <footer>
+      <span>Görüntüler yalnızca bilgisayarınızda işlenir.</span>
+      <button class="history">Geçmiş</button>
+    </footer>
+  </main>
+  <script src="launcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+name: Windows Build and Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Test and build on Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Kaynak kodu al
+        uses: actions/checkout@v4
+
+      - name: Node.js kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Bağımlılıkları kur
+        run: npm ci
+
+      - name: Birim testlerini çalıştır
+        run: npm test
+
+      - name: JavaScript dosyalarını doğrula
+        run: npm run check
+
+      - name: Windows kurulum paketini üret
+        run: npm run dist:win
+
+      - name: SHA-256 doğrulama dosyasını üret
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem "dist/WX-Shot-Windows-Setup-*.exe" | Select-Object -First 1
+          $hash = Get-FileHash -Algorithm SHA256 -LiteralPath $installer.FullName
+          "$($hash.Hash)  $($installer.Name)" | Set-Content "dist/WX-Shot-Windows-SHA256.txt" -Encoding utf8
+
+      - name: İş akışı çıktısını sakla
+        uses: actions/upload-artifact@v4
+        with:
+          name: WX-Shot-Windows-${{ github.sha }}
+          path: |
+            dist/WX-Shot-Windows-Setup-*.exe
+            dist/WX-Shot-Windows-SHA256.txt
+          if-no-files-found: error
+
+      - name: Etiket sürümünü GitHub Releases alanına yükle
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          gh release view $tag 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $tag --title "WX Shot $tag" --generate-notes
+          }
+          $installer = Get-ChildItem "dist/WX-Shot-Windows-Setup-*.exe" | Select-Object -First 1
+          gh release upload $tag $installer.FullName "dist/WX-Shot-Windows-SHA256.txt" --clobber

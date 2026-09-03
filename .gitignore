@@ -1,0 +1,22 @@
+# Dependencies and build output
+node_modules/
+dist/
+.npm-cache/
+.builder-cache/
+
+# Logs and temporary files
+*.log
+*.tmp
+.release-staging-*/
+tests/ocr-fixture.png
+
+# Editors and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Installers belong in GitHub Releases, not Git history
+release-assets/*.exe
+release-assets/*.zip
+

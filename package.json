@@ -1,0 +1,63 @@
+{
+  "name": "wx-shot-windows",
+  "version": "1.0.0",
+  "description": "WX Shot - Windows için yerel ekran görüntüsü ve düzenleme uygulaması",
+  "main": "src/main.js",
+  "author": "WX Shot",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node tests/core.test.js",
+    "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer/editor.js && node --check src/renderer/selector.js && node --check src/renderer/launcher.js",
+    "pack:win": "electron-builder --win dir",
+    "dist:win": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^44.1.1",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.wxshot.windows",
+    "productName": "WX Shot",
+    "asar": true,
+    "compression": "maximum",
+    "electronLanguages": [
+      "tr",
+      "en-US"
+    ],
+    "asarUnpack": [
+      "scripts/**"
+    ],
+    "files": [
+      "src/**/*",
+      "scripts/**/*",
+      "assets/**/*",
+      "package.json",
+      "LICENSE"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon-256.png",
+      "artifactName": "WX-Shot-Windows-Setup-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "WX Shot",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

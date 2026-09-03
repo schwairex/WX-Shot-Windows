@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'">
+  <title>WX Shot — Düzenleyici</title>
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+  <main class="editor" role="application" aria-label="WX Shot düzenleyici">
+    <header>
+      <div class="logo"><span>WX</span><strong>Shot</strong></div>
+      <div class="header-actions">
+        <button class="header-button smart-redact" title="Akıllı gizle"><span>◈</span><b>Akıllı gizle</b></button>
+        <button class="icon-button history-toggle" title="Geçmiş" aria-label="Geçmiş">◴</button>
+        <div class="zoom-controls" aria-label="Yakınlaştırma">
+          <button class="icon-button zoom-out" aria-label="Uzaklaştır">−</button>
+          <button class="zoom-value" title="Sığdır">100%</button>
+          <button class="icon-button zoom-in" aria-label="Yakınlaştır">+</button>
+        </div>
+        <div class="image-info">—</div>
+        <button class="icon-button minimize" aria-label="Simge durumuna küçült">−</button>
+        <button class="icon-button close" aria-label="Kapat">×</button>
+      </div>
+    </header>
+
+    <section class="workspace" tabindex="0">
+      <div class="canvas-stage">
+        <canvas class="base"></canvas>
+        <canvas class="effects"></canvas>
+        <canvas class="draw"></canvas>
+        <canvas class="preview"></canvas>
+      </div>
+    </section>
+
+    <footer>
+      <div class="tools" role="toolbar" aria-label="Çizim araçları">
+        <button class="tool active" data-tool="pen" title="Kalem (P)" aria-pressed="true">✎</button>
+        <button class="tool" data-tool="highlight" title="Vurgulayıcı (H)" aria-pressed="false">▰</button>
+        <button class="tool" data-tool="line" title="Çizgi (L)" aria-pressed="false">╱</button>
+        <button class="tool" data-tool="arrow" title="Ok (A)" aria-pressed="false">➜</button>
+        <button class="tool" data-tool="rect" title="Dikdörtgen (R)" aria-pressed="false">□</button>
+        <button class="tool" data-tool="ellipse" title="Elips (O)" aria-pressed="false">○</button>
+        <button class="tool" data-tool="blur" title="Bulanıklaştır (B)" aria-pressed="false">◉</button>
+        <button class="tool" data-tool="pixelate" title="Pikselleştir (X)" aria-pressed="false">▦</button>
+        <button class="tool" data-tool="text" title="Metin (T)" aria-pressed="false">T</button>
+        <button class="tool" data-tool="eraser" title="Silgi (E)" aria-pressed="false">◇</button>
+        <span class="divider"></span>
+        <div class="colors" aria-label="Renk seçimi"></div>
+        <label class="width-control" title="Çizgi kalınlığı"><input class="width-input" type="range" min="2" max="18" value="5" aria-label="Çizgi kalınlığı"></label>
+        <button class="tool style-toggle" title="Stil" aria-label="Stil">☷</button>
+        <span class="divider"></span>
+        <button class="tool undo" title="Geri al" disabled>↶</button>
+        <button class="tool redo" title="Yinele" disabled>↷</button>
+      </div>
+      <div class="actions">
+        <select class="format-select" aria-label="Biçim"><option value="png">PNG</option><option value="jpeg">JPEG</option><option value="webp">WebP</option></select>
+        <select class="scale-select" aria-label="Ölçek"><option value="1">100%</option><option value="0.75">75%</option><option value="0.5">50%</option></select>
+        <button class="secondary copy"><span>▣</span>Kopyala</button>
+        <button class="primary save"><span>⇩</span>Farklı kaydet</button>
+      </div>
+    </footer>
+
+    <aside class="style-panel panel" role="dialog" aria-label="Stil" hidden>
+      <strong>Stil ve dışa aktarma</strong>
+      <label>Saydamlık <input class="style-opacity" type="range" min="20" max="100" value="100"></label>
+      <label class="check"><input class="style-fill" type="checkbox"> Dolgu</label>
+      <label class="check"><input class="style-dashed" type="checkbox"> Kesik çizgi</label>
+      <label class="check"><input class="style-shadow" type="checkbox"> Gölge</label>
+      <label>Ok ucu <select class="arrow-head"><option value="classic">Klasik</option><option value="double">Çift</option><option value="dot">Nokta</option></select></label>
+      <label>JPEG/WebP kalitesi <input class="export-quality" type="range" min="40" max="100" value="92"></label>
+    </aside>
+
+    <aside class="history-panel panel" role="dialog" aria-label="Geçmiş" hidden>
+      <div class="panel-header"><strong>Son çekimler</strong><button class="clear-history">Temizle</button></div>
+      <div class="history-list"></div>
+    </aside>
+    <div class="toast" aria-live="polite"></div>
+  </main>
+  <script src="../shared/core.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>
