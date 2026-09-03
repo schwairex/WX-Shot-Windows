@@ -165,13 +165,13 @@ Hata bildirimleri ve geliştirme önerileri değerlidir. Değişiklik göndermed
 
 ## Sürüm notları
 
-### v1.1.0
+### v1.2.0
 
 - Electron 44'ün yeni `ClipboardItem` API'siyle Windows panosuna görüntü kopyalama düzeltildi
 - Araç simgeleri sade, tutarlı ve yüksek çözünürlüklü SVG ikonlarla yenilendi
 - Hazır renklerin görünürlüğü düzeltildi
 - Windows renk penceresinden istenen rengi seçme özelliği eklendi
-- GitHub kaynak ve sürüm paketi v1.1.0 için güncellendi
+- GitHub kaynak ve sürüm paketi v1.2.0 için güncellendi
 
 ### v1.0.0
 
